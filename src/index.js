@@ -5,9 +5,7 @@ const url = require('url');
 http.createServer(function(req, res) {
     const pathname = url.parse(req.url, true);
     const filename = pathname.pathname.replace('.html', '');
-    console.log('Pathname -> ', pathname.pathname);
-    console.log('Filename -> ', filename);
-    fs.readFile(`./pages${filename}.html`, function(err, data){
+    fs.readFile(filename === '/' ? `./pages/index.html` : `./pages${filename}.html`, function(err, data){
         if(err){
             fs.readFile('./pages/404.html', function(err2, data2){
                 if(err2){
